@@ -1,17 +1,21 @@
-{
-  "name": "garage-backend",
-  "version": "1.0.0",
-  "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.0.0",
-    "dotenv": "^16.0.0",
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22"
-  }
-}
+import express from "express";
+import dotenv from "dotenv";
+import healthRouter from "./routes/health.js";
+import bookingsRouter from "./routes/bookings.js";
+import usersRouter from "./routes/users.js";
+
+dotenv.config();
+const app = express();
+app.use(express.json());
+
+// Routes
+app.use("/health", healthRouter);
+app.use("/bookings", bookingsRouter);
+app.use("/users", usersRouter);
+
+// Root
+app.get("/", (req, res) => res.send("Garage Backend running ✅"));
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
