@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Customers from "./Customers";
 import Garages from "./Garages";
 import Bookings from "./Bookings";
+import Mechanics from "./Mechanics";
 import MechanicMap from "./MechanicMap";
+import EndpointTester from "./EndpointTester";
 
 export default function Dashboard() {
   const [selectedGarage, setSelectedGarage] = useState(null);
@@ -16,6 +18,7 @@ export default function Dashboard() {
           <Customers />
           <Garages />
           <Bookings />
+          <EndpointTester /> {/* New mini Postman inside dashboard */}
         </div>
         <div style={{ flex: 2 }}>
           <MechanicMap garageId={selectedGarage} customerLocation={customerLocation} />
